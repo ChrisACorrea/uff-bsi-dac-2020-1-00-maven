@@ -6,6 +6,7 @@
 package hello;
 
 import java.lang.String;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -17,7 +18,7 @@ public abstract class MessageUtils {
         
         String msg = "";
         
-        if(lang == null || lang.isBlank()) {
+        if(lang == null || StringUtils.isBlank(lang)) {
             lang = "pt";
         }
         
@@ -43,7 +44,7 @@ public abstract class MessageUtils {
         
         String msg = getMessage(lang);
        
-        if(nome == null || nome.isBlank()) {
+        if(nome == null || StringUtils.isBlank(nome)) {
             nome = "Desconhecido";
         }
         
