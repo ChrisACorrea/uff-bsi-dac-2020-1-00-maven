@@ -5,6 +5,8 @@
  */
 package hello;
 
+import java.lang.String;
+
 /**
  *
  * @author chris
