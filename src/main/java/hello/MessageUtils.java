@@ -35,6 +35,9 @@ public abstract class MessageUtils {
             case "de":
                 msg = "Hallo, ";
                 break;
+            case "es":
+                msg = "Hola, ";
+                break;
         }
         
         return msg;
