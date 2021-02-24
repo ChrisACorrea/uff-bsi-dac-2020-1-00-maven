@@ -17,6 +17,8 @@ import java.io.Serializable;
 public class MessageBean implements Serializable {
      
     private String msg;
+    private String nome;
+
         
     public MessageBean() {
     }
@@ -26,20 +28,6 @@ public class MessageBean implements Serializable {
     }
     
     public void setMsg(String value) {
-        switch (value){
-            case "":
-            case "pt":
-                msg = "Alô";
-                break;
-            case "en":
-                msg = "Hello";
-                break;
-            case "de":
-                msg = "Hallo";
-                break;
-            case "fr":
-                msg = "Bonjour";
-                break;
-        }
+        this.msg = MessageUtils.getMensagemMontada(value, nome);
     }
 }

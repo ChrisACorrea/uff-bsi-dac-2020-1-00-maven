@@ -31,19 +31,10 @@ public class HelloServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HelloServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        String conteudoPagina = "<h1>Servlet HelloServlet at " + request.getContextPath() + "</h1>";
+        
+        this.montarPagina(response, conteudoPagina);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,44 +50,11 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String msg = "";
+        String msg = MessageUtils.getMensagemMontada(request.getParameter("lang"), request.getParameter("nome"));
+        String conteudoPagina = "<h1>Servlet HelloServlet</h1>";
+        conteudoPagina += "<p>" + msg + "</p>";
         
-        String lang = request.getParameter("lang");
-        if(lang==null)
-            lang = "pt";
-        switch(lang){
-            case "pt":
-                msg = "Alô, ";
-                break;
-            case "en":
-                msg = "Hello, ";
-                break;
-            case "fr":
-                msg = "Bonjour, ";
-                break;
-        }
-        
-        String nome = request.getParameter("nome");
-
-        if(nome==null)
-            nome = "Fulano";
-        
-        msg = msg+nome+"!";
-
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HelloServlet</h1>");
-            out.println("<p>" + msg + "</p>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        this.montarPagina(response, conteudoPagina);
     }
 
     /**
@@ -110,47 +68,12 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String msg = "";
         
-        String lang = request.getParameter("lang");
-        if(lang==null)
-            lang = "pt";
-        switch(lang){
-            case "pt":
-                msg = "Alô, ";
-                break;
-            case "en":
-                msg = "Hello, ";
-                break;
-            case "fr":
-                msg = "Bonjour, ";
-                break;
-            case "de":
-                msg = "Hallo, ";
-                break;
-        }
+        String msg = MessageUtils.getMensagemMontada(request.getParameter("lang"), request.getParameter("nome"));
+        String conteudoPagina = "<h1>Servlet HelloServlet</h1>";
+        conteudoPagina += "<p>" + msg + "</p>";
         
-        String nome = request.getParameter("nome");
-
-        if(nome==null)
-            nome = "Fulano";
-        
-        msg = msg+nome+"!";
-
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HelloServlet</h1>");
-            out.println("<p>" + msg + "</p>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        this.montarPagina(response, conteudoPagina);
     }
 
     /**
@@ -162,5 +85,22 @@ public class HelloServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void montarPagina(HttpServletResponse response, String conteudoPagina) throws IOException {
+        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet HelloServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println(conteudoPagina);
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
 }
